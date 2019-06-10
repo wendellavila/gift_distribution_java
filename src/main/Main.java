@@ -60,12 +60,18 @@ public class Main {
     
     public static void giveGifts(){
         for(int i = 0; i < children; i++){
-            float sum = 0.0f;
+            float maxApproval = -1.0f;
+            float minApproval = 2.0f;
             float avg;
             for(int j = 0; j < gifts; j++){
-                sum += giftApproval[i][j];
+                if(giftApproval[i][j] < minApproval){
+                    minApproval = giftApproval[i][j];
+                }
+                if(giftApproval[i][j] > maxApproval){
+                    maxApproval = giftApproval[i][j];
+                }
             }
-            avg = sum / gifts;
+            avg = maxApproval - minApproval;
             int gift = findAvgGift(i, avg);
             availableGifts[gift] = false;
             givenGifts[i] = gift;
